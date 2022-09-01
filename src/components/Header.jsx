@@ -9,7 +9,7 @@ function Header({title}) {
   return (
     <header className='header'>
       <h1>{title}</h1>
-      <Button color={"lightblue"} text={"Hello"}/>
+      <Button color={"coral"} text={"Add"}/>
     </header>
   )
 }
@@ -21,7 +21,7 @@ Header.defaultProps = {
 }
 
 
-// Type Checking
+// Type Checking, lebih bagus pake typescript
 Header.propTypes = {
   title: PropTypes.string.isRequired,
 }
