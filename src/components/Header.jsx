@@ -6,10 +6,14 @@ function Header({title}) {
 
   // console.log(props)
 
+  function handleClick() {
+    console.log(1)
+  }
+
   return (
     <header className='header'>
       <h1>{title}</h1>
-      <Button color={"coral"} text={"Add"}/>
+      <Button color={"coral"} text={"Add"} onClick={handleClick}/>
     </header>
   )
 }
