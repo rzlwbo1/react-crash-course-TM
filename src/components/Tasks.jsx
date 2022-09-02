@@ -1,14 +1,16 @@
 import React from 'react'
+import Task from './Task'
 
-function Task({tasks}) {
+function Tasks({tasks}) {
 
   return (
     <>
     {
-      tasks.map((task) => <p key={task.id}>{task.text}</p>)
+      // di spread task nya jadi lebih simple 
+      tasks.map((task) => <Task key={task.id} {...task}/>)
     }
     </>
   )
 }
 
-export default Task
+export default Tasks
