@@ -2,18 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from './Button';
 
-function Header({title}) {
+function Header({title, onShow, changeText}) {
 
   // console.log(props)
-
-  function handleClick() {
-    console.log(1)
-  }
 
   return (
     <header className='header'>
       <h1>{title}</h1>
-      <Button color={"coral"} text={"Add"} onClick={handleClick}/>
+      <Button color={changeText ? "crimson" : "limegreen"} text={changeText ? "Close": "Add"} onClickShow={onShow}/>
     </header>
   )
 }

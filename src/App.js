@@ -7,6 +7,8 @@ import './style.css'
 
 function App() {
 
+  const [showAdd, setShowAdd] = useState(false);
+
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -72,8 +74,13 @@ function App() {
 
   return (
     <div className='container'>
-      <Header />
-      <FormAdd />
+      <Header onShow={() => setShowAdd(!showAdd)} changeText={showAdd} />
+
+      {/* && itu merupakan logika yang gamau ada else nya, jadi dipastikan harus true */}       
+      {
+        showAdd && <FormAdd />
+      }
+
       {
         tasks.length > 0 ? 
         <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>
