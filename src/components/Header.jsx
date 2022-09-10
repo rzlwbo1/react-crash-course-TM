@@ -9,7 +9,7 @@ function Header({title, onShow, changeText}) {
   return (
     <header className='header'>
       <h1>{title}</h1>
-      <Button color={changeText ? "crimson" : "limegreen"} text={changeText ? "Close": "Add"} onClickShow={onShow}/>
+      <Button color={changeText ? "crimson" : "limegreen"} text={changeText ? "Close": "Add"} onClickShow={onShow} />
     </header>
   )
 }

@@ -69,8 +69,17 @@ function App() {
       }
 
     }))
-
   }
+
+  // Form add
+  function addTask(data) {
+    const generateId = +new Date();
+
+    const newTask = {id: generateId, ...data}
+
+    setTasks([...tasks, newTask])
+
+  } 
 
   return (
     <div className='container'>
@@ -78,7 +87,7 @@ function App() {
 
       {/* && itu merupakan logika yang gamau ada else nya, jadi dipastikan harus true */}       
       {
-        showAdd && <FormAdd />
+        showAdd && <FormAdd onAdd={addTask}/>
       }
 
       {

@@ -2,14 +2,28 @@ import React, {useState} from 'react'
 
 // form itu component level state, bukan global state/app state
 
-function FormAdd() {
+function FormAdd({onAdd}) {
 
   const [text, setText] = useState('');
   const [day, setDay] = useState('');
   const [reminder, setReminder] = useState(false);
 
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+
+    onAdd({text, day, reminder})
+
+    setText("")
+    setDay("")
+    setReminder(false)
+
+  }
+
+
   return (
-    <form className='add-form'>
+    <form className='add-form' onSubmit={handleSubmit}>
       <div className="form-control">
         <label>Task</label>
         <input type="text" placeholder='add task' value={text} onChange={(e) => setText(e.target.value)}/>
