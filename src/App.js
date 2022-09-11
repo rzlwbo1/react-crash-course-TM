@@ -1,13 +1,41 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import FormAdd from "./components/FormAdd";
 import "./style.css";
 
 function App() {
+  
   const [showAdd, setShowAdd] = useState(false);
 
   const [tasks, setTasks] = useState([]);
+
+
+  // working with API
+  // jdi useEffect biasanya digunain buat ambil data dari server, dan masukan ke state, pastikan data nya berupa json agar mudah di olah
+  useEffect(() => {
+
+    async function getTasksApi() {
+      const tasksFromServer = await fetchData()
+
+      // tetep masukan ke state walaupun pake useEffect
+      setTasks(tasksFromServer)
+    }
+
+    getTasksApi();
+
+  }, [])
+
+
+  // pisahkan fetch dengan use effect
+  async function fetchData() {
+    const res = await fetch('http://localhost:3004/tasks');
+    const data = await res.json();
+
+    return data;
+  }
+
+
 
   // Delete task
   function deleteTask(id) {
