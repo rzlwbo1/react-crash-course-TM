@@ -5,7 +5,7 @@ import FormAdd from "./components/FormAdd";
 import "./style.css";
 
 function App() {
-  
+
   const [showAdd, setShowAdd] = useState(false);
 
   const [tasks, setTasks] = useState([]);
@@ -38,11 +38,23 @@ function App() {
 
 
   // Delete task
-  function deleteTask(id) {
+  async function deleteTask(id) {
     let conf = window.confirm("Sure to delete??");
 
-    // cara update state dengan use state agak beda dgn class
-    conf ? setTasks(tasks.filter((task) => task.id !== id)) : setTasks(tasks);
+    // cara update state dengan use state, beda dengan class comp
+    if(conf) {
+
+      // deelte di server
+      await fetch(`http://localhost:3004/tasks/${id}`, {
+        method: 'DELETE'
+      });
+
+      // delete di state
+      setTasks(tasks.filter((task) => task.id !== id))
+
+    } else {
+      setTasks(tasks);
+    }
 
     // =============
 
