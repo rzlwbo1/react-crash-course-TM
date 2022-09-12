@@ -10,7 +10,7 @@
       "id": 3,
       "text": "Lorem Ipsum Dolor Sit Amet",
       "day": "Feb 7th at 2:30pm",
-      "reminder": false
+      "reminder": true
     },
     {
       "text": "Makan",
@@ -23,12 +23,6 @@
       "day": "malem",
       "reminder": true,
       "id": 5
-    },
-    {
-      "text": "adas",
-      "day": "asdasd",
-      "reminder": false,
-      "id": 6
     }
   ]
 }

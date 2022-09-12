@@ -63,19 +63,46 @@ function App() {
     // setCount(count + 1);
   }
 
-  // reminder task
-  function toggleReminder(id) {
-    // jadi ini cara bacanya adalah, jika id sama dgn id yg di dbclick, maka
-    // menghasilkan array of obj dgn task yg ada dan reminder yg bersangkutan di NOT (!)
-    // jika tidak maka task nya ga berubah.
 
+
+  // reminder task
+  async function toggleReminder(id) {
+
+
+    // update toggle from ui to backend API
+
+    // first req by id to server
+    const reqDataById = await fetch(`http://localhost:3004/tasks/${id}`);
+    const foundData = await reqDataById.json();
+
+    // second, create new obj from req, and opposite reminder
+    const updTask = {...foundData, reminder: !foundData.reminder}
+
+    // third, send back to server again
+    const req = await fetch(`http://localhost:3004/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(updTask)
+    });
+
+
+    // third, update state dibawah, jadi result.reminder
+    const result = await req.json()
+
+
+
+    // jadi ini cara bacanya adalah, ambil data yg jika id sama dgn id yg di dbclick, maka
+    // menghasilkan array of obj dgn task yg ada, dan reminder yg bersangkutan di NOT (!)
+    // jika tidak maka task nya ga berubah.
     setTasks(
       tasks.map((task) => {
         if (task.id === id) {
           // disini spread task yg sesuai dgn if dan merubah juga reminder nya
           return {
             ...task,
-            reminder: !task.reminder,
+            reminder: result.reminder,
           };
         } else {
           return task;
@@ -83,6 +110,8 @@ function App() {
       })
     );
   }
+
+
 
   // Form add
   async function addTask(data) {
