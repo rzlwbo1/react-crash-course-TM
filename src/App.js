@@ -85,12 +85,30 @@ function App() {
   }
 
   // Form add
-  function addTask(data) {
-    const generateId = +new Date();
+  async function addTask(data) {
 
-    const newTask = { id: generateId, ...data };
+    ////// Code ini sebelum pake backend json-server /////
 
-    setTasks([...tasks, newTask]);
+    // const generateId = +new Date();
+    // const newTask = { id: generateId, ...data };
+    // setTasks([...tasks, newTask]);
+
+
+    // ketika pake backend untuk post data
+    const result = await fetch('http://localhost:3004/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+
+
+    // jangan lupa masukan ke state juga, await jgn lupaa, kan promise nih
+    const newTask = await result.json();
+    console.log(result)
+    setTasks([...tasks, newTask])
+    
   }
 
   return (
